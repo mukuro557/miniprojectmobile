@@ -10,7 +10,7 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Tab Demo'),
@@ -25,11 +25,14 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
               ),
               Tab(
                 icon: Icon(Icons.train),
-                text: 'Train',
+                text: 'Search',
+              ),Tab(
+                icon: Icon(Icons.home),
+                text: 'Voice',
               ),
               Tab(
                 icon: Icon(Icons.directions_bike),
-                text: 'Bike',
+                text: 'Setting',
               ),
             ],
           ),
@@ -46,6 +49,9 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
           Container(
             child: Text('Bike'),
             color: Colors.orange,
+          ), Container(
+            child: Text('Home'),
+            color: Colors.yellow,
           ),
         ]),
       ),
