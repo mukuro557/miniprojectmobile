@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
 
 class Mainpagedictionary extends StatefulWidget {
   @override
@@ -11,10 +12,17 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Title'),
-        bottom: TabBar(tabs:[Tab(icon: Icon(Icons.home),text: "home",),Tab(icon: Icon(Icons.home),text: "home",)]),
       ),
       body: Container(),
-
+      bottomNavigationBar: Container(
+        color: Colors.red,
+        child: TabBar(
+          tabs[Tab(
+            icon: Icons.red,
+            text: "text",
+          )],
+        ),
+      ),
     );
   }
 }
