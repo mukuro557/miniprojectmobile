@@ -11,14 +11,10 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Title'),
+        bottom: TabBar(tabs:[Tab(icon: Icon(Icons.home),text: "home",),Tab(icon: Icon(Icons.home),text: "home",)]),
       ),
       body: Container(),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text('home')),
-        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text('home')),
-        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text('home')),
-        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text('home'))
-      ]),
+
     );
   }
 }
