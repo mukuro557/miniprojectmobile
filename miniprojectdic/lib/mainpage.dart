@@ -13,6 +13,12 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
         title: Text('Title'),
       ),
       body: Container(),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text('home')),
+        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text('home')),
+        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text('home')),
+        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text('home'))
+      ]),
     );
   }
 }
