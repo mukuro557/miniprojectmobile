@@ -18,7 +18,7 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
         color: Colors.red,
         child: TabBar(
           tabs[Tab(
-            icon: Icons.red,
+            icon: Icons.home,
             text: "text",
           )],
         ),
