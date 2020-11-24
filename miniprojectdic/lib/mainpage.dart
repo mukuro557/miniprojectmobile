@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 
+import 'search.dart';
+
 class Mainpagedictionary extends StatefulWidget {
   @override
   _MainpagedictionaryState createState() => _MainpagedictionaryState();
@@ -43,14 +45,13 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
             color: Colors.yellow,
           ),
           Container(
-            child: Text('Train'),
-            color: Colors.green,
+            child: SearchDemo()
           ),
           Container(
-            child: Text('Bike'),
+            child: Text('voice'),
             color: Colors.orange,
           ), Container(
-            child: Text('Home'),
+            child: Text('setting'),
             color: Colors.yellow,
           ),
         ]),
