@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
-
 import 'search.dart';
 
 class Mainpagedictionary extends StatefulWidget {
@@ -14,9 +13,6 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Tab Demo'),
-        ),
         bottomNavigationBar: Container(
           color: Colors.purple,
           child: TabBar(
