@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:miniprojectdic/home.dart';
+import 'package:miniprojectdic/setting.dart';
 
 class Mainpagedictionary extends StatefulWidget {
   @override
@@ -13,27 +14,49 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Tab Demo'),
-        // ),
         bottomNavigationBar: Container(
-          color: Colors.purple,
+          color: Colors.white,
           child: TabBar(
             tabs: [
               Tab(
-                icon: Icon(Icons.home),
-                text: 'Home',
+                child: Text(
+                  'Home',
+                  style: TextStyle(color: Colors.lightBlue),
+                ),
+                icon: Icon(
+                  Icons.home,
+                  color: Colors.lightBlue,
+                ),
               ),
               Tab(
-                icon: Icon(Icons.search),
-                text: 'Search',
-              ),Tab(
-                icon: Icon(Icons.keyboard_voice),
-                text: 'Voice',
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.lightBlue,
+                ),
+                child: Text(
+                  'Search',
+                  style: TextStyle(color: Colors.lightBlue),
+                ),
               ),
               Tab(
-                icon: Icon(Icons.settings),
-                text: 'Setting',
+                icon: Icon(
+                  Icons.keyboard_voice,
+                  color: Colors.lightBlue,
+                ),
+                child: Text(
+                  'Voice',
+                  style: TextStyle(color: Colors.lightBlue),
+                ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.settings,
+                  color: Colors.lightBlue,
+                ),
+                child: Text(
+                  'Settings',
+                  style: TextStyle(color: Colors.lightBlue),
+                ),
               ),
             ],
           ),
@@ -50,8 +73,9 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
           Container(
             child: Text('Bike'),
             color: Colors.orange,
-          ), Container(
-            child: Text('Home'),
+          ),
+          Container(
+            child: Settingdictionary(),
             color: Colors.yellow,
           ),
         ]),
