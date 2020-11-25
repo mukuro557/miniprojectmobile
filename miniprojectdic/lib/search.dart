@@ -1,77 +1,68 @@
-import 'package:dio/dio.dart';
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:miniprojectdic/sqlitehelp.dart';
 
 class SearchDemo extends StatefulWidget {
   @override
-  _SearchDemoState createState() => _SearchDemoState();
+  State<StatefulWidget> createState() => _SearchDemoState();
 }
 
 class _SearchDemoState extends State<SearchDemo> {
-  final TextEditingController _filter = new TextEditingController();
-  final dio = new Dio();
-  String _searchText = "";
-  List names = new List();
-  List filteredNames = new List(); // names filtered by search text
-  Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Search Example');
-  SqliteHelper helper = SqliteHelper();
-  List<Map<String, dynamic>> dataA = [];
-
-  _SearchDemo() {
-    _filter.addListener(() {
-      if (_filter.text.isEmpty) {
-        setState(() {
-          _searchText = "";
-          filteredNames = names;
-        });
-      } else {
-        setState(() {
-          _searchText = _filter.text;
-        });
-      }
-    });
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      body: FirstPage(),
+    );
   }
+}
+
+class FirstPage extends StatefulWidget {
+  @override
+  _FirstPageState createState() => new _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  List<String> added = [];
+  String currentText = "";
+  GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
+  SqliteHelper helper = SqliteHelper();
+  List names = new List();
+  List filteredNames = new List();
+  List<Map<String, dynamic>> dataA = [];
+  List<String> suggestions = [];
+
+  _FirstPageState() {
+    textField = SimpleAutoCompleteTextField(submitOnSuggestionTap: false,
+      key: key,
+      decoration: new InputDecoration(hintText: "Search...."),
+      suggestions: suggestions,
+      textChanged: (text) => currentText = text,
+      clearOnSubmit: true,
+      textSubmitted: (text) => setState(() {
+        if (text != "") {
+          added.add(text);
+        }
+      }),
+    );
+  }
+
+   
+
+  SimpleAutoCompleteTextField textField;
+  bool showWhichErrorText = false;
 
   void _getNames() async {
     dataA = await helper.searchdb();
-    List tempList = new List();
     for (int i = 0; i < dataA.length; i++) {
-      tempList.add(dataA[i]['esearch']);
+      suggestions.add(dataA[i]['esearch']);
     }
 
-    setState(() {
-      names = tempList;
-      filteredNames = names;
-    });
-  }
-
-  void _searchPressed() {
-    setState(() {
-      if (this._searchIcon.icon == Icons.search) {
-        this._searchIcon = new Icon(Icons.close);
-        this._appBarTitle = new TextField(
-          controller: _filter,
-          decoration: new InputDecoration(
-            prefixIcon: new Icon(Icons.search),
-            hintText: 'Search...',
-          ),
-          onSubmitted: (value) => filteredNames = [value],
-        );
-      } else {
-        this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text('Search Example');
-        filteredNames = names;
-        _filter.clear();
-      }
-    });
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
     (() async {
       await helper.opendb();
       await _getNames();
@@ -80,24 +71,28 @@ class _SearchDemoState extends State<SearchDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: _appBarTitle,
-        actions: [IconButton(icon: _searchIcon, onPressed: _searchPressed)],
-      ),
-      body: Container(
-        child: ListView.builder(
-      itemCount: names == null ? 0 : filteredNames.length,
-      itemBuilder: (BuildContext context, int index) {
-        return new ListTile(
-          title: Text('${filteredNames[index]}'),
-          onTap: () => print(filteredNames[index]),
-        );
-      },
-    ),
-      ),
-      resizeToAvoidBottomPadding: false,
-    );
-  }
+    Column body = new Column(children: [
+      new ListTile(
+          title: textField,
+          trailing: new IconButton(
+              icon: new Icon(Icons.search),
+              onPressed: () {
+                textField.triggerSubmitted();
+                showWhichErrorText = !showWhichErrorText;
+                textField.updateDecoration(
+                    decoration: new InputDecoration(hintText: "Search...."),);
+              })),
+    ]);
 
+    
+
+    return new Scaffold(
+        resizeToAvoidBottomPadding: false,
+        appBar: new AppBar(
+            title: new Text('Tranlate'),
+            ),
+        body: body);
+  }
 }
+
+
