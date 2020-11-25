@@ -4,6 +4,7 @@ import 'search.dart';
 import 'package:miniprojectdic/home.dart';
 import 'package:miniprojectdic/setting.dart';
 
+
 class Mainpagedictionary extends StatefulWidget {
   @override
   _MainpagedictionaryState createState() => _MainpagedictionaryState();
