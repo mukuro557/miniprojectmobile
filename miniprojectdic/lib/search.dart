@@ -56,7 +56,7 @@ class _SearchDemoState extends State<SearchDemo> {
             prefixIcon: new Icon(Icons.search),
             hintText: 'Search...',
           ),
-          onSubmitted: (value) => filteredNames = [value],
+          onChanged: (value) => filteredNames = [value],
         );
       } else {
         this._searchIcon = new Icon(Icons.search);
