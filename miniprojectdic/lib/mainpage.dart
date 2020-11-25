@@ -73,14 +73,9 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
           Container(
             child: Text('voice'),
             color: Colors.orange,
-<<<<<<< HEAD
-          ), Container(
-            child: Text('setting'),
-=======
           ),
           Container(
             child: Settingdictionary(),
->>>>>>> origin/เพิ่มหน้าการตั้งค่า-กับ-แก้ดีไซน์หน้าแรกนิดหน่อย
             color: Colors.yellow,
           ),
         ]),
