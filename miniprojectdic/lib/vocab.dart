@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class Vocab extends StatefulWidget {
   @override
@@ -6,7 +7,23 @@ class Vocab extends StatefulWidget {
 }
 
 class _VocabState extends State<Vocab> {
+  final FlutterTts flutterTts = FlutterTts();
   bool isSaved = false;
+
+  Future _speakeng() async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1);
+    print(await flutterTts.getVoices);
+    await flutterTts.speak('Reliable');
+  }
+
+  Future _speakTH() async {
+    await flutterTts.setLanguage("th-TH");
+    await flutterTts.setPitch(1);
+    print(await flutterTts.getVoices);
+    await flutterTts.speak('เชื่อถือได้');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +41,7 @@ class _VocabState extends State<Vocab> {
             Container(
               color: Colors.white,
               width: 500,
-              height: 180,
+              height: 150,
               child: Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: Row(
@@ -40,33 +57,34 @@ class _VocabState extends State<Vocab> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 80, bottom: 15),
-                          child: Text('[ADJ]'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Text(
-                            'เชื่อถือได้',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          padding: const EdgeInsets.only(right: 30),
+                          child: Row(
+                            children: [
+                              Text('[ADJ]'),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.volume_up,
+                                  color: Colors.blue,
+                                ),
+                                onPressed: () => _speakeng(),
+                              ),
+                            ],
                           ),
-                        ),
+                        )
                       ],
                     ),
                     Spacer(
                       flex: 16,
                     ),
-                    
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 100,right: 5),
+                      padding: const EdgeInsets.only(bottom: 100, right: 5),
                       child: Text('Favorite'),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 100),
                       child: GestureDetector(
-                        child: Icon(isSaved ? Icons.favorite : Icons.favorite_border,
+                        child: Icon(
+                            isSaved ? Icons.favorite : Icons.favorite_border,
                             color: isSaved ? Colors.pinkAccent : null),
                         onTap: () {
                           setState(() {
@@ -80,6 +98,44 @@ class _VocabState extends State<Vocab> {
                       ),
                     ),
                     Spacer(),
+                  ],
+                ),
+              ),
+            ),
+            Spacer(),
+            Container(
+              color: Colors.white,
+              width: 500,
+              height: 120,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 35),
+                child: Row(
+                  children: [
+                    Spacer(),
+                    Column(
+                      children: [
+                        Text(
+                          'เชื่อถือได้',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 30, left: 10),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.volume_up,
+                          color: Colors.blue,
+                        ),
+                        onPressed: () => _speakTH(),
+                      ),
+                    ),
+                    Spacer(
+                      flex: 16,
+                    ),
                   ],
                 ),
               ),
@@ -126,7 +182,7 @@ class _VocabState extends State<Vocab> {
             Container(
               color: Colors.white,
               width: 500,
-              height: 420,
+              height: 335,
               child: Padding(
                 padding: const EdgeInsets.only(right: 230, top: 30),
                 child: Column(
