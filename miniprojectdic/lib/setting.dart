@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:miniprojectdic/favorite.dart';
+import 'package:miniprojectdic/fontsize.dart';
 
 class Settingdictionary extends StatefulWidget {
   @override
@@ -44,7 +46,8 @@ class _SettingdictionaryState extends State<Settingdictionary> {
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Spacer(),
-                    Icon(Icons.arrow_forward_ios)
+                    IconButton(
+                        icon: Icon(Icons.arrow_forward_ios), onPressed: () {}),
                   ],
                 ),
               ),
@@ -64,7 +67,16 @@ class _SettingdictionaryState extends State<Settingdictionary> {
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Spacer(),
-                    Icon(Icons.arrow_forward_ios)
+                    IconButton(
+                        icon: Icon(Icons.arrow_forward_ios),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Fontsize(),
+                            ),
+                          );
+                        }),
                   ],
                 ),
               ),
@@ -84,12 +96,23 @@ class _SettingdictionaryState extends State<Settingdictionary> {
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Spacer(),
-                    Icon(Icons.arrow_forward_ios)
+                     IconButton(
+                        icon: Icon(Icons.arrow_forward_ios),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Favorite(),
+                            ),
+                          );
+                        }),
                   ],
                 ),
               ),
             ),
-            Spacer(flex: 190,),
+            Spacer(
+              flex: 190,
+            ),
           ],
         ),
       ),
