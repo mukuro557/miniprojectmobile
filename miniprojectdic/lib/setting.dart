@@ -79,7 +79,7 @@ class _SettingdictionaryState extends State<Settingdictionary> {
                 child: Row(
                   children: [
                     Text(
-                      'Clear Your History',
+                      'Favorite',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
