@@ -45,7 +45,20 @@ class SqliteHelper {
   }
 
   searchdb() async {
-     List list = await _db.rawQuery('SELECT * FROM eng2th');
+    List list = await _db.rawQuery('SELECT * FROM eng2th');
+
+    // var list = await _db.query('eng2th',
+    //     columns: ['tentry'], where: '"esearch" =?', whereArgs: ['$word']);
+    if (list.length > 0) {
+    } else {
+      print('Not found');
+    }
+    return list;
+  }
+
+  finddb(word) async {
+    List list =
+        await _db.rawQuery('SELECT * FROM eng2th WHERE esearch = ?'[word]);
     // if (list.length > 0) {
     //   print(list);
     // } else {
@@ -60,8 +73,9 @@ class SqliteHelper {
     }
     return list;
   }
-  finddb(word) async {
-     List list = await _db.rawQuery('SELECT * FROM eng2th WHERE esearch = ?' [word]);
+
+  gameword(id) async {
+    List list = await _db.rawQuery('SELECT tentry,esearch FROM eng2th WHERE id = ?'[id]);
     // if (list.length > 0) {
     //   print(list);
     // } else {
@@ -69,8 +83,9 @@ class SqliteHelper {
     // }
 
     // var list = await _db.query('eng2th',
-    //     columns: ['tentry'], where: '"esearch" =?', whereArgs: ['$word']);
+    //     columns: ['tentry', 'esearch'], where: '"id" = ?', whereArgs: [id]);
     if (list.length > 0) {
+      print(list);
     } else {
       print('Not found');
     }
