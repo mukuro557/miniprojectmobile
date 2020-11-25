@@ -45,7 +45,7 @@ class SqliteHelper {
   }
 
   searchdb() async {
-     List list = await _db.rawQuery('SELECT * FROM eng2th');
+    List list = await _db.rawQuery('SELECT * FROM eng2th');
     // if (list.length > 0) {
     //   print(list);
     // } else {
@@ -60,16 +60,18 @@ class SqliteHelper {
     }
     return list;
   }
-  finddb(word) async {
-     List list = await _db.rawQuery('SELECT * FROM eng2th WHERE esearch = ?' [word]);
+
+  finddb(String words) async {
+    String word = words;
+    //List list = await _db.rawQuery('SELECT * FROM eng2th WHERE esearch = ?' word);
     // if (list.length > 0) {
     //   print(list);
     // } else {
     //   print('Not found');
     // }
 
-    // var list = await _db.query('eng2th',
-    //     columns: ['tentry'], where: '"esearch" =?', whereArgs: ['$word']);
+     var list = await _db.query('eng2th',
+         columns: ['tentry','esearch','ecat','esyn','ethai'], where: '"esearch" =?', whereArgs: [word]);
     if (list.length > 0) {
     } else {
       print('Not found');
