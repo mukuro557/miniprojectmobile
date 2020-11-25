@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
+import 'package:miniprojectdic/game.dart';
 import 'search.dart';
 import 'package:miniprojectdic/home.dart';
 import 'package:miniprojectdic/setting.dart';
@@ -72,7 +73,7 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
             child: SearchDemo()
           ),
           Container(
-            child: Text('voice'),
+            child: GameDemo(),
             color: Colors.orange,
           ),
           Container(
