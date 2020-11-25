@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
@@ -9,19 +10,29 @@ class Vocab extends StatefulWidget {
 class _VocabState extends State<Vocab> {
   final FlutterTts flutterTts = FlutterTts();
   bool isSaved = false;
+  String eng = 'Apple';
+  String th = 'แอปเปิ้ล';
 
   Future _speakeng() async {
     await flutterTts.setLanguage("en-US");
     await flutterTts.setPitch(1);
     print(await flutterTts.getVoices);
-    await flutterTts.speak('Reliable');
+    await flutterTts.speak(eng);
   }
 
   Future _speakTH() async {
     await flutterTts.setLanguage("th-TH");
     await flutterTts.setPitch(1);
     print(await flutterTts.getVoices);
-    await flutterTts.speak('เชื่อถือได้');
+    await flutterTts.speak(th);
+  }
+
+  Future _copytxt() async {
+    await FlutterClipboard.copy(th);
+  }
+
+  Future _copytxteng() async {
+    await FlutterClipboard.copy(eng);
   }
 
   @override
@@ -49,11 +60,14 @@ class _VocabState extends State<Vocab> {
                     Spacer(),
                     Column(
                       children: [
-                        Text(
-                          'Reliable',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: Text(
+                            eng,
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         Padding(
@@ -74,14 +88,15 @@ class _VocabState extends State<Vocab> {
                       ],
                     ),
                     Spacer(
-                      flex: 16,
+                      flex: 5,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 100, right: 5),
-                      child: Text('Favorite'),
-                    ),
+                        padding: const EdgeInsets.only(bottom: 100, right: 5),
+                        child: IconButton(
+                            icon: Icon(Icons.content_copy),
+                            onPressed: () => _copytxteng())),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 100),
+                      padding: const EdgeInsets.only(bottom: 80),
                       child: GestureDetector(
                         child: Icon(
                             isSaved ? Icons.favorite : Icons.favorite_border,
@@ -115,7 +130,7 @@ class _VocabState extends State<Vocab> {
                     Column(
                       children: [
                         Text(
-                          'เชื่อถือได้',
+                          th,
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
@@ -134,8 +149,18 @@ class _VocabState extends State<Vocab> {
                       ),
                     ),
                     Spacer(
-                      flex: 16,
+                      flex: 5,
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.content_copy,
+                        ),
+                        onPressed: () => _copytxt(),
+                      ),
+                    ),
+                    Spacer(),
                   ],
                 ),
               ),
