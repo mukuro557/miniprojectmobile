@@ -86,26 +86,7 @@ class _SearchDemoState extends State<SearchDemo> {
         actions: [IconButton(icon: _searchIcon, onPressed: _searchPressed)],
       ),
       body: Container(
-        child: _buildList(),
-      ),
-      resizeToAvoidBottomPadding: false,
-    );
-  }
-
-  Widget _buildList() {
-    if (!(_searchText.isEmpty)) {
-      List tempList = new List();
-      for (int i = 0; i < filteredNames.length; i++) {
-        if (filteredNames[i]['esearch']
-            .toLowerCase()
-            .contains(_searchText.toLowerCase())) {
-          tempList.add(filteredNames[i]);
-        }
-      }
-      filteredNames = tempList;
-      print(filteredNames);
-    }
-    return ListView.builder(
+        child: ListView.builder(
       itemCount: names == null ? 0 : filteredNames.length,
       itemBuilder: (BuildContext context, int index) {
         return new ListTile(
@@ -113,6 +94,10 @@ class _SearchDemoState extends State<SearchDemo> {
           onTap: () => print(filteredNames[index]),
         );
       },
+    ),
+      ),
+      resizeToAvoidBottomPadding: false,
     );
   }
+
 }
