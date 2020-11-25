@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'search.dart';
+import 'package:miniprojectdic/home.dart';
 
 class Mainpagedictionary extends StatefulWidget {
   @override
@@ -13,6 +14,9 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
+        // appBar: AppBar(
+        //   title: Text('Tab Demo'),
+        // ),
         bottomNavigationBar: Container(
           color: Colors.purple,
           child: TabBar(
@@ -22,14 +26,14 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
                 text: 'Home',
               ),
               Tab(
-                icon: Icon(Icons.train),
+                icon: Icon(Icons.search),
                 text: 'Search',
               ),Tab(
-                icon: Icon(Icons.home),
+                icon: Icon(Icons.keyboard_voice),
                 text: 'Voice',
               ),
               Tab(
-                icon: Icon(Icons.directions_bike),
+                icon: Icon(Icons.settings),
                 text: 'Setting',
               ),
             ],
@@ -37,7 +41,7 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
         ),
         body: TabBarView(children: [
           Container(
-            child: Text('Home'),
+            child: Homepage(),
             color: Colors.yellow,
           ),
           Container(
