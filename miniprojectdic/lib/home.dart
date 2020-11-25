@@ -23,6 +23,7 @@ class _HomepageState extends State<Homepage> {
   List<Map<String, dynamic>> dataA = [];
   List<Map<String, dynamic>> dataB = [];
   List<String> suggestions = [];
+  int _length;
 
   _HomepageState() {
     textField = SimpleAutoCompleteTextField(
@@ -48,6 +49,11 @@ class _HomepageState extends State<Homepage> {
         }
       }),
     );
+  }
+
+  _check() async {
+    SharedPreferences history = await SharedPreferences.getInstance();
+    _length = history.getStringList("history").length;
   }
 
   _save() async {
@@ -111,18 +117,23 @@ class _HomepageState extends State<Homepage> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 50, left: 40, bottom: 20),
+                          const EdgeInsets.only(top: 50, left: 30, bottom: 20),
                       child: Text(
                         'Your History',
                         style: TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold),
                       ),
                     ),
+                    Spacer(),
                     Padding(
-                      padding: const EdgeInsets.only(top: 40,left: 140),
+                      padding: const EdgeInsets.only(top: 50),
                       child: FlatButton(
                         onPressed: () {},
-                        child: Icon(Icons.delete,size: 20,color: Colors.white,),
+                        child: Icon(
+                          Icons.delete,
+                          size: 20,
+                          color: Colors.white,
+                        ),
                         color: Colors.blue[400],
                         shape: CircleBorder(
                           side: BorderSide(
@@ -133,11 +144,7 @@ class _HomepageState extends State<Homepage> {
                     )
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: Column(
-                    children: [
-                      Container(
+                Container(
                           height: 100,
                           width: 400,
                           margin: EdgeInsets.all(15),
@@ -185,9 +192,6 @@ class _HomepageState extends State<Homepage> {
                               Spacer(),
                             ],
                           )),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
@@ -197,11 +201,6 @@ class _HomepageState extends State<Homepage> {
 
     return new Scaffold(
         resizeToAvoidBottomPadding: false,
-        // appBar: new AppBar(
-        //   elevation: 0,
-        //   backgroundColor: Colors.white,
-        //   title: new Text(''),
-        // ),
         body: body);
   }
 }
