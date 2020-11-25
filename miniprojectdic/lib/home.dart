@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'dart:convert';
-
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:miniprojectdic/speech.dart';
 import 'package:miniprojectdic/sqlitehelp.dart';
+import 'package:miniprojectdic/vocab.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Homepage extends StatefulWidget {
@@ -39,6 +39,12 @@ class _HomepageState extends State<Homepage> {
         if (text != "") {
           added.add(text);
           _save();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Vocab(),
+            ),
+          );
         }
       }),
     );
@@ -47,7 +53,6 @@ class _HomepageState extends State<Homepage> {
   _save() async {
     SharedPreferences history = await SharedPreferences.getInstance();
     history.setStringList("history", added);
-    print(history.getStringList("history"));
   }
 
   SimpleAutoCompleteTextField textField;
