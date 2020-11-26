@@ -48,14 +48,14 @@ class _VocabState extends State<Vocab> {
     int num = word.length - 1;
     print(word[num]);
     dataA = await helper.finddb(word[num]);
+    setState(() {
     eng = dataA[0]['esearch'];
     th = dataA[0]['tentry'];
     ecat = dataA[0]['ecat'];
     esyn = dataA[0]['esyn'];
     ethai = dataA[0]['ethai'];
-    // for (int i = 0; i < dataA.length; i++) {
-    //   suggestions.add(dataA[i]['esearch']);
-    // }
+    });
+    
   }
 
   @override

@@ -78,4 +78,22 @@ class SqliteHelper {
     }
     return list;
   }
+
+  findgame(int id) async {
+    int word = id;
+    //List list = await _db.rawQuery('SELECT * FROM eng2th WHERE esearch = ?' word);
+    // if (list.length > 0) {
+    //   print(list);
+    // } else {
+    //   print('Not found');
+    // }
+
+     var list = await _db.query('eng2th',
+         columns: ['tentry','esearch'], where: '"id" =?', whereArgs: [word]);
+    if (list.length > 0) {
+    } else {
+      print('Not found');
+    }
+    return list;
+  }
 }
