@@ -13,6 +13,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  var data = [];
   bool isSaved = false;
   List<String> added = [];
   String currentText = "";
@@ -38,25 +39,31 @@ class _HomepageState extends State<Homepage> {
       clearOnSubmit: true,
       textSubmitted: (text) => setState(() {
         if (text != "") {
-          added.add(text);
-          _save();
+          added.insert(0, text);
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => Vocab(),
             ),
           );
+          save();
+          print(added);
         }
       }),
     );
   }
 
-  _check() async {
+  check() async {
     SharedPreferences history = await SharedPreferences.getInstance();
-    _length = history.getStringList("history").length;
+    var dataofStore = history.getStringList("history");
+    print(dataofStore);
+
+    await setState(() {
+      data = dataofStore;
+    });
   }
 
-  _save() async {
+  save() async {
     SharedPreferences history = await SharedPreferences.getInstance();
     history.setStringList("history", added);
   }
@@ -78,6 +85,7 @@ class _HomepageState extends State<Homepage> {
     (() async {
       await helper.opendb();
       await _getNames();
+      await check();
     })();
   }
 
@@ -144,54 +152,91 @@ class _HomepageState extends State<Homepage> {
                     )
                   ],
                 ),
-                Container(
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: data.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 5),
+                          width: 430,
                           height: 100,
-                          width: 400,
-                          margin: EdgeInsets.all(15),
                           decoration: BoxDecoration(
-                            color: Colors.blue[50],
-                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 0),
+                                blurRadius: 5,
+                                color: Colors.blue[100].withOpacity(0.5),
+                              ),
+                            ],
                           ),
-                          child: Row(
+                          child: Card(
+                            color: Colors.blue,
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Spacer(),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 205, top: 15, bottom: 20),
-                                    child: Text(
-                                      'abandon',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                          color: Colors.lightBlue),
-                                    ),
-                                  ),
-                                  Text(
-                                      '[VT]ทิ้ง, ทอดทิ้ง, ละทิ้ง, ทิ้งขว้าง, ผละ, จากไป')
-                                ],
+                              Text(
+                                data[index],
+                                style: TextStyle(fontSize: 30,color: Colors.white),
                               ),
-                              Spacer(
-                                flex: 2,
-                              ),
-                              GestureDetector(
-                                child: Icon(
-                                    isSaved ? Icons.star : Icons.star_border,
-                                    color: isSaved ? Colors.yellow[800] : null),
-                                onTap: () {
-                                  setState(() {
-                                    if (isSaved == false) {
-                                      isSaved = true;
-                                    } else {
-                                      isSaved = false;
-                                    }
-                                  });
-                                },
-                              ),
-                              Spacer(),
                             ],
                           )),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                // Container(
+                //           height: 100,
+                //           width: 400,
+                //           margin: EdgeInsets.all(15),
+                //           decoration: BoxDecoration(
+                //             color: Colors.blue[50],
+                //             borderRadius: BorderRadius.circular(5),
+                //           ),
+                //           child: Row(
+                //             children: [
+                //               Spacer(),
+                //               Column(
+                //                 children: [
+                //                   Padding(
+                //                     padding: const EdgeInsets.only(
+                //                         right: 205, top: 15, bottom: 20),
+                //                     child: Text(
+                //                       'abandon',
+                //                       style: TextStyle(
+                //                           fontWeight: FontWeight.bold,
+                //                           fontSize: 20,
+                //                           color: Colors.lightBlue),
+                //                     ),
+                //                   ),
+                //                   Text(
+                //                       '[VT]ทิ้ง, ทอดทิ้ง, ละทิ้ง, ทิ้งขว้าง, ผละ, จากไป')
+                //                 ],
+                //               ),
+                //               Spacer(
+                //                 flex: 2,
+                //               ),
+                //               GestureDetector(
+                //                 child: Icon(
+                //                     isSaved ? Icons.star : Icons.star_border,
+                //                     color: isSaved ? Colors.yellow[800] : null),
+                //                 onTap: () {
+                //                   setState(() {
+                //                     if (isSaved == false) {
+                //                       isSaved = true;
+                //                     } else {
+                //                       isSaved = false;
+                //                     }
+                //                   });
+                //                 },
+                //               ),
+                //               Spacer(),
+                //             ],
+                //           )),
               ],
             ),
           ),
@@ -199,8 +244,6 @@ class _HomepageState extends State<Homepage> {
       ],
     );
 
-    return new Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: body);
+    return new Scaffold(resizeToAvoidBottomPadding: false, body: body);
   }
 }
