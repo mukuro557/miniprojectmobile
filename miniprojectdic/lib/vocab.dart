@@ -14,13 +14,12 @@ class _VocabState extends State<Vocab> {
   SqliteHelper helper = SqliteHelper();
   List<Map<String, dynamic>> dataA = [];
   bool isSaved = false;
-  String eng = 'Apple';
-  String th = 'แอปเปิ้ล';
-  String ecat = "adj";
-  String esyn = "apple";
-  String ethai = "ผลแอปเปิ้ล";
+  String eng = '';
+  String th = '';
+  String ecat = "";
+  String esyn = "";
+  String ethai = "";
 
-  
   Future _speakeng() async {
     await flutterTts.setLanguage("en-US");
     await flutterTts.setPitch(1);
@@ -54,7 +53,6 @@ class _VocabState extends State<Vocab> {
     ecat = dataA[0]['ecat'];
     esyn = dataA[0]['esyn'];
     ethai = dataA[0]['ethai'];
-
     // for (int i = 0; i < dataA.length; i++) {
     //   suggestions.add(dataA[i]['esearch']);
     // }
@@ -82,70 +80,156 @@ class _VocabState extends State<Vocab> {
         ),
         body: Column(
           children: [
-            Card(
-              child: Row(
-                children: [
-                  Column(
+            Container(
+              width: 500,
+              height: 150,
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
+                  child: Row(
                     children: [
-                      Text(eng),
-                      IconButton(
-                          icon: Icon(Icons.volume_up),
-                          onPressed: () {
-                            _speakeng();
-                          })
+                      Column(
+                        children: [
+                          Text(
+                            eng,
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Text('[$ecat]'.toUpperCase()),
+                              IconButton(
+                                  icon: Icon(
+                                    Icons.volume_up,
+                                    color: Colors.blue,
+                                  ),
+                                  onPressed: () {
+                                    _speakeng();
+                                  }),
+                            ],
+                          )
+                        ],
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 80),
+                        child: Row(
+                          children: [
+                            IconButton(
+                                icon: Icon(Icons.content_copy),
+                                onPressed: () {
+                                  _copytxteng();
+                                }),
+                            IconButton(
+                                icon: Icon(isSaved
+                                    ? Icons.favorite
+                                    : Icons.favorite_border),
+                                onPressed: null)
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                  Spacer(),
-                  IconButton(
-                      icon: Icon(Icons.content_copy),
-                      onPressed: () {
-                        _copytxteng();
-                      }),
-                  IconButton(
-                      icon: Icon(
-                          isSaved ? Icons.favorite : Icons.favorite_border),
-                      onPressed: null)
-                ],
+                ),
               ),
             ),
-            Card(
-              child: Row(
-                children: [
-                  Column(
+            Container(
+              height: 150,
+              width: 500,
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Row(
                     children: [
-                      Text(th),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40, left: 20),
+                            child: Text(
+                              th,
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       IconButton(
-                          icon: Icon(Icons.volume_up),
+                          icon: Icon(
+                            Icons.volume_up,
+                            color: Colors.blue,
+                          ),
                           onPressed: () {
                             _speakTH();
-                          })
+                          }),
+                      Spacer(),
+                      IconButton(
+                          icon: Icon(
+                            Icons.content_copy,
+                          ),
+                          onPressed: () {
+                            _copytxteng();
+                          }),
                     ],
                   ),
-                  Spacer(),
-                  IconButton(
-                      icon: Icon(Icons.content_copy),
-                      onPressed: () {
-                        _copytxteng();
-                      }),
-                ],
+                ),
               ),
             ),
-            Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text('More interpretation'),
-                  Text(ecat + " " + ethai),
-                ],
+            Container(
+              width: 500,
+              height: 150,
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'More interpretation',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        ecat + "." + " " + ethai,
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-            Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text('More synonyms'),
-                  Text(ecat + " " + esyn),
-                ],
+            Container(
+              width: 500,
+              height: 150,
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'More synonyms',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        ecat + " " + esyn,
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
