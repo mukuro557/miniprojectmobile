@@ -160,42 +160,47 @@ class _VocabState extends State<Vocab> {
               height: 150,
               width: 500,
               child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 40, left: 20),
-                            child: Text(
-                              th,
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                                  children: [Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(width: 400,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 40, left: 20),
+                                child: Text(
+                                  th,
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      IconButton(
-                          icon: Icon(
-                            Icons.volume_up,
-                            color: Colors.blue,
-                          ),
-                          onPressed: () {
-                            _speakTH();
-                          }),
-                      Spacer(),
-                      IconButton(
-                          icon: Icon(
-                            Icons.content_copy,
-                          ),
-                          onPressed: () {
-                            _copytxteng();
-                          }),
-                    ],
-                  ),
+                          ],
+                        ),
+                        IconButton(
+                            icon: Icon(
+                              Icons.volume_up,
+                              color: Colors.blue,
+                            ),
+                            onPressed: () {
+                              _speakTH();
+                            }),
+                        
+                        IconButton(
+                            icon: Icon(
+                              Icons.content_copy,
+                            ),
+                            onPressed: () {
+                              _copytxteng();
+                            }),
+                      ],
+                    ),
+                  ),], 
                 ),
               ),
             ),
