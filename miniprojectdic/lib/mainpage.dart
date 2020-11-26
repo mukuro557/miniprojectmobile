@@ -4,6 +4,7 @@ import 'package:miniprojectdic/game.dart';
 import 'search.dart';
 import 'package:miniprojectdic/home.dart';
 import 'package:miniprojectdic/setting.dart';
+import 'package:miniprojectdic/speech.dart';
 
 
 class Mainpagedictionary extends StatefulWidget {
@@ -33,21 +34,21 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
               ),
               Tab(
                 icon: Icon(
-                  Icons.search,
+                  Icons.mic,
                   color: Colors.lightBlue,
                 ),
                 child: Text(
-                  'Search',
+                  'Speech',
                   style: TextStyle(color: Colors.lightBlue),
                 ),
               ),
               Tab(
                 icon: Icon(
-                  Icons.keyboard_voice,
+                  Icons.games,
                   color: Colors.lightBlue,
                 ),
                 child: Text(
-                  'Voice',
+                  'Game',
                   style: TextStyle(color: Colors.lightBlue),
                 ),
               ),
@@ -70,7 +71,7 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
             color: Colors.yellow,
           ),
           Container(
-            child: SearchDemo()
+            child: Speech()
           ),
           Container(
             child: GameDemo(),
