@@ -48,24 +48,45 @@ class _VocabState extends State<Vocab> {
     int num = word.length - 1;
     print(word[num]);
     dataA = await helper.finddb(word[num]);
+
     setState(() {
-    eng = dataA[0]['esearch'];
-    th = dataA[0]['tentry'];
-    ecat = dataA[0]['ecat'];
-    esyn = dataA[0]['esyn'];
-    ethai = dataA[0]['ethai'];
+      if (dataA[0]['esearch'] != null) {
+        eng = dataA[0]['esearch'];
+      } else {
+        eng = "null";
+      }
+      if (dataA[0]['tentry'] != null) {
+        th = dataA[0]['tentry'];
+      } else {
+        th = "null";
+      }
+      if (dataA[0]['ecat'] != null) {
+        ecat = dataA[0]['ecat'];
+      } else {
+        ecat = "null";
+      }
+      if (dataA[0]['esyn'] != null) {
+        esyn = dataA[0]['esyn'];
+      } else {
+        esyn = "null";
+      }
+      if (dataA[0]['ethai'] != null) {
+        ethai = dataA[0]['ethai'];
+      } else {
+        ethai = "null";
+      }
     });
-    
+
+    // ethai = dataA[0]['ethai'];
+    // print(dataA[0]);
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    (() async {
-      await helper.opendb();
-      await _getNames();
-    })();
+    helper.opendb();
+    _getNames();
   }
 
   @override
