@@ -52,6 +52,10 @@ class _HomepageState extends State<Homepage> {
       }),
     );
   }
+  removeinfo() async {
+    SharedPreferences history = await SharedPreferences.getInstance();
+    history.remove("history");
+  }
 
   check() async {
     SharedPreferences history = await SharedPreferences.getInstance();
@@ -136,7 +140,9 @@ class _HomepageState extends State<Homepage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 50),
                       child: FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          removeinfo();
+                        },
                         child: Icon(
                           Icons.delete,
                           size: 20,
@@ -174,16 +180,17 @@ class _HomepageState extends State<Homepage> {
                             ],
                           ),
                           child: Card(
-                            color: Colors.blue,
+                              color: Colors.blue,
                               child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                data[index],
-                                style: TextStyle(fontSize: 30,color: Colors.white),
-                              ),
-                            ],
-                          )),
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    data[index],
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.white),
+                                  ),
+                                ],
+                              )),
                         ),
                       ],
                     );
