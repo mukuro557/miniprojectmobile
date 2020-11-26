@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -21,6 +22,34 @@ class _GameDemoState extends State<GameDemo> {
   String quesion = '';
   String left = '';
   String right = '';
+  double _reduce = 60.00;
+  int count = 0;
+
+  void checktime() {
+    _reduce = 60.00;
+    count = 0;
+    reduction();
+  }
+
+  void reduction() {
+    Timer.periodic(Duration(milliseconds: 1), (timer) {
+      setState(() {
+        _reduce = _reduce - 0.01;
+      });
+      if (_reduce < 0.00) {
+        timer.cancel();
+        setState(() {
+          _reduce = 0.00;
+        });
+      }
+    });
+  }
+
+  void clickable() {
+    if (_reduce > 0 && _reduce != 1) {
+      count++;
+    }
+  }
 
   _mode() {
     if (mode == 0) {
@@ -84,6 +113,7 @@ class _GameDemoState extends State<GameDemo> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    checktime();
     _randomleftright();
     _randomword();
 
@@ -103,6 +133,24 @@ class _GameDemoState extends State<GameDemo> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 50),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("time  = ${_reduce.toStringAsFixed(1)}"),
+                IconButton(
+                    icon: Icon(Icons.refresh),
+                    onPressed: () {
+                      checktime();
+                    })
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 50),
+            child: Text("score  = $count"),
+          ),
           Text(quesion + " ?"),
           Padding(
             padding: const EdgeInsets.only(top: 40),
@@ -113,7 +161,30 @@ class _GameDemoState extends State<GameDemo> {
                 Container(
                   width: 150,
                   child: RaisedButton(
-                    onPressed: null,
+                    onPressed: () {
+                      if (_reduce > 0 && _reduce != 1) {
+                        if (_button == 1) {
+                          clickable();
+                          _randomleftright();
+                          _randomword();
+
+                          (() async {
+                            await helper.opendb();
+                            _getNames();
+                          })();
+                          _mode();
+                        } else {
+                          _randomleftright();
+                          _randomword();
+
+                          (() async {
+                            await helper.opendb();
+                            _getNames();
+                          })();
+                          _mode();
+                        }
+                      }
+                    },
                     child: Text(left),
                   ),
                 ),
@@ -121,7 +192,30 @@ class _GameDemoState extends State<GameDemo> {
                 Container(
                   width: 150,
                   child: RaisedButton(
-                    onPressed: null,
+                    onPressed: () {
+                      if (_reduce > 0 && _reduce != 1) {
+                        if (_button == 2) {
+                          clickable();
+                          _randomleftright();
+                          _randomword();
+
+                          (() async {
+                            await helper.opendb();
+                            _getNames();
+                          })();
+                          _mode();
+                        } else {
+                          _randomleftright();
+                          _randomword();
+
+                          (() async {
+                            await helper.opendb();
+                            _getNames();
+                          })();
+                          _mode();
+                        }
+                      }
+                    },
                     child: Text(right),
                   ),
                 ),

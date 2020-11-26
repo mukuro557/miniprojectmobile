@@ -57,10 +57,6 @@ class _VocabState extends State<Vocab> {
     ethai = dataA[0]['ethai'];
     });
     
-
-    // for (int i = 0; i < dataA.length; i++) {
-    //   suggestions.add(dataA[i]['esearch']);
-    // }
   }
 
   @override
