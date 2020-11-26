@@ -64,7 +64,7 @@ class _VocabState extends State<Vocab> {
     super.initState();
     (() async {
       await helper.opendb();
-      await _getNames();
+      // await _getNames();
     })();
   }
 
