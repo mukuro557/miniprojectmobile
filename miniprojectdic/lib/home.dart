@@ -6,6 +6,7 @@ import 'package:miniprojectdic/speech.dart';
 import 'package:miniprojectdic/sqlitehelp.dart';
 import 'package:miniprojectdic/vocab.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -13,6 +14,12 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  final FlutterTts flutterTts = FlutterTts();
+  String eng = 'abhorrence';
+  String th = '';
+  String ecat = "";
+  String esyn = "";
+  String ethai = "";
   var data = [];
   bool isSaved = false;
   List<String> added = [];
@@ -26,12 +33,26 @@ class _HomepageState extends State<Homepage> {
   List<String> suggestions = [];
   int _length;
 
+  Future _speakeng() async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1);
+    print(await flutterTts.getVoices);
+    await flutterTts.speak(eng);
+  }
+
+  Future _speakTH() async {
+    await flutterTts.setLanguage("th-TH");
+    await flutterTts.setPitch(1);
+    print(await flutterTts.getVoices);
+    await flutterTts.speak(th);
+  }
+
   _HomepageState() {
     textField = SimpleAutoCompleteTextField(
       submitOnSuggestionTap: true,
       key: key,
       decoration: new InputDecoration(
-        hintText: "Search....",
+        hintText: "Type your word here.",
         border: InputBorder.none,
       ),
       suggestions: suggestions,
@@ -97,11 +118,73 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     Column body = new Column(
       children: [
+        Container(
+          width: 500,
+          height: 110,
+          color: Colors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 290, top: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ClipOval(
+                      child: Material(
+                        color: Colors.blue[900], // button color
+                        child: InkWell(
+                          splashColor: Colors.red, // inkwell color
+                          child: SizedBox(
+                              width: 52,
+                              height: 52,
+                              child: Icon(
+                                Icons.history,
+                                size: 40,
+                                color: Colors.white,
+                              )),
+                          onTap: () {},
+                        ),
+                      ),
+                    ),
+                    Text('HISTORY'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ClipOval(
+                      child: Material(
+                        color: Colors.blue[500], // button color
+                        child: InkWell(
+                          splashColor: Colors.red, // inkwell color
+                          child: SizedBox(
+                              width: 52,
+                              height: 52,
+                              child: Icon(
+                                Icons.star,
+                                size: 35,
+                                color: Colors.white,
+                              )),
+                          onTap: () {},
+                        ),
+                      ),
+                    ),
+                    Text('MY FAVARITE')
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.only(left: 35, right: 35, top: 60),
           child: Container(
             decoration: BoxDecoration(
-                color: Color(0xFFE0E0E0),
+                color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(30))),
             child: new ListTile(
               title: textField,
@@ -111,7 +194,8 @@ class _HomepageState extends State<Homepage> {
                   textField.triggerSubmitted();
                   showWhichErrorText = !showWhichErrorText;
                   textField.updateDecoration(
-                    decoration: new InputDecoration(hintText: "Search...."),
+                    decoration:
+                        new InputDecoration(hintText: "Type your word here."),
                   );
                   SharedPreferences history =
                       await SharedPreferences.getInstance();
@@ -122,128 +206,161 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
         SingleChildScrollView(
-          child: Container(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 20, top: 50),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 50, left: 30, bottom: 20),
-                      child: Text(
-                        'Your History',
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
+                Stack(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      child: Image.asset(
+                        'asset/images/bg.png',
+                        height: 400,
+                        width: 500,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: FlatButton(
-                        onPressed: () {
-                          removeinfo();
-                        },
-                        child: Icon(
-                          Icons.delete,
-                          size: 20,
-                          color: Colors.white,
-                        ),
-                        color: Colors.blue[400],
-                        shape: CircleBorder(
-                          side: BorderSide(
-                            color: Colors.blue[400],
+                    Container(
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 120, top: 60),
+                            child: Text(
+                              'Word of the day',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 22.0,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: data.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 5),
-                          width: 430,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 0),
-                                blurRadius: 5,
-                                color: Colors.blue[100].withOpacity(0.5),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 210,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 45),
+                                child: Container(
+                                  height: 55,
+                                  width: 200,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      Container(
+                                        child: Text(
+                                          eng,
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 45.0),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 100,
+                                height: 45,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text('[N]'),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              ClipOval(
+                                child: Material(
+                                  color: Colors.blue[800], // button color
+                                  child: InkWell(
+                                    splashColor: Colors.red, // inkwell color
+                                    child: SizedBox(
+                                        width: 36,
+                                        height: 36,
+                                        child: Icon(
+                                          Icons.volume_up,
+                                          size: 25,
+                                          color: Colors.white,
+                                        )),
+                                    onTap: () => _speakeng(),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              ClipOval(
+                                child: Material(
+                                  color: Colors.blue[600], // button color
+                                  child: InkWell(
+                                    splashColor: Colors.red, // inkwell color
+                                    child: SizedBox(
+                                        width: 36,
+                                        height: 36,
+                                        child: Icon(
+                                          Icons.star,
+                                          size: 25,
+                                          color: Colors.white,
+                                        )),
+                                    onTap: () {},
+                                  ),
+                                ),
                               ),
                             ],
                           ),
-                          child: Card(
-                              color: Colors.blue,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    data[index],
-                                    style: TextStyle(
-                                        fontSize: 30, color: Colors.white),
-                                  ),
-                                ],
-                              )),
-                        ),
-                      ],
-                    );
-                  },
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                height: 65,
+                              ),
+                              Container(
+                                height: 30,
+                                width: 200,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                          'การเปิดเทปให้ดูใหม่อีกครั้ง  เช่น ภาพการแข่งขันกีฬา โดยมากมักจะเป็นภาพเคลื่อนไหวช้า ๆ ให้ดูกันใหม่'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(width: 200),
+                              Container(
+                                height: 55,
+                                width: 200,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                          'authorize; give credentials to; certify'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                // Container(
-                //           height: 100,
-                //           width: 400,
-                //           margin: EdgeInsets.all(15),
-                //           decoration: BoxDecoration(
-                //             color: Colors.blue[50],
-                //             borderRadius: BorderRadius.circular(5),
-                //           ),
-                //           child: Row(
-                //             children: [
-                //               Spacer(),
-                //               Column(
-                //                 children: [
-                //                   Padding(
-                //                     padding: const EdgeInsets.only(
-                //                         right: 205, top: 15, bottom: 20),
-                //                     child: Text(
-                //                       'abandon',
-                //                       style: TextStyle(
-                //                           fontWeight: FontWeight.bold,
-                //                           fontSize: 20,
-                //                           color: Colors.lightBlue),
-                //                     ),
-                //                   ),
-                //                   Text(
-                //                       '[VT]ทิ้ง, ทอดทิ้ง, ละทิ้ง, ทิ้งขว้าง, ผละ, จากไป')
-                //                 ],
-                //               ),
-                //               Spacer(
-                //                 flex: 2,
-                //               ),
-                //               GestureDetector(
-                //                 child: Icon(
-                //                     isSaved ? Icons.star : Icons.star_border,
-                //                     color: isSaved ? Colors.yellow[800] : null),
-                //                 onTap: () {
-                //                   setState(() {
-                //                     if (isSaved == false) {
-                //                       isSaved = true;
-                //                     } else {
-                //                       isSaved = false;
-                //                     }
-                //                   });
-                //                 },
-                //               ),
-                //               Spacer(),
-                //             ],
-                //           )),
               ],
             ),
           ),
@@ -251,6 +368,9 @@ class _HomepageState extends State<Homepage> {
       ],
     );
 
-    return new Scaffold(resizeToAvoidBottomPadding: false, body: body);
+    return new Scaffold(
+        backgroundColor: Color.fromRGBO(216, 236, 228, 10),
+        resizeToAvoidBottomPadding: false,
+        body: body);
   }
 }
