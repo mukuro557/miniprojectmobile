@@ -10,103 +10,167 @@ class _FavoriteState extends State<Favorite> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(216, 236, 228, 5),
       appBar: AppBar(
+        title: Center(
+          child: Text(
+            'HISTORY',
+            style: TextStyle(color: Colors.black, fontSize: 25),
+          ),
+        ),
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromRGBO(230, 236, 228, 50),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 50, left: 40, bottom: 20),
-                    child: Text(
-                      'Favorite',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+      body: Column(
+        children: [
+          Stack(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 22, top: 30),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("asset/images/bg3.png"),
+                      fit: BoxFit.fill,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40, left: 210),
-                    child: FlatButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.delete,
-                        size: 20,
-                        color: Colors.white,
-                      ),
-                      color: Colors.blue[400],
-                      shape: CircleBorder(
-                        side: BorderSide(
-                          color: Colors.blue[400],
+                  child: Container(
+                    height: 580,
+                    width: 420,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Row(
+                              //Row ของคอลัมตัวอักษรอังกฤษกับไทย
+                              children: [
+                                Row(
+                                  //คอลัมอังกฤษ
+                                  children: [
+                                    SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      width: 80,
+                                      child: ListView(
+                                        scrollDirection: Axis.horizontal,
+                                        children: [
+                                          Container(
+                                            child: Text(
+                                              'apple melmon',
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  //คอลัมไทย
+                                  children: [
+                                    SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    Container(
+                                      height: 29,
+                                      width: 200,
+                                      child: ListView(
+                                        scrollDirection: Axis.horizontal,
+                                        children: [
+                                          Container(
+                                            child: Text(
+                                              'แอปเปิ้ล มะนาว กล้วย ส้ม',
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Row(
+                              //Row ของคอลัมตัวอักษรอังกฤษกับไทย
+                              children: [
+                                Row(
+                                  //คอลัมอังกฤษ
+                                  children: [
+                                    SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      width: 80,
+                                      child: ListView(
+                                        scrollDirection: Axis.horizontal,
+                                        children: [
+                                          Container(
+                                            child: Text(
+                                              'apple melmon',
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  //คอลัมไทย
+                                  children: [
+                                    SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    Container(
+                                      height: 29,
+                                      width: 200,
+                                      child: ListView(
+                                        scrollDirection: Axis.horizontal,
+                                        children: [
+                                          Container(
+                                            child: Text(
+                                              'แอปเปิ้ล มะนาว กล้วย ส้ม',
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 0),
-                child: Column(
-                  children: [
-                    Container(
-                        height: 100,
-                        width: 400,
-                        margin: EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          color: Colors.blue[50],
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Row(
-                          children: [
-                            Spacer(),
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 205, top: 15, bottom: 20),
-                                  child: Text(
-                                    'abandon',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        color: Colors.lightBlue),
-                                  ),
-                                ),
-                                Text(
-                                    '[VT]ทิ้ง, ทอดทิ้ง, ละทิ้ง, ทิ้งขว้าง, ผละ, จากไป')
-                              ],
-                            ),
-                            Spacer(
-                              flex: 2,
-                            ),
-                            GestureDetector(
-                              child: Icon(
-                                  isSaved ? Icons.star : Icons.star_border,
-                                  color: isSaved ? Colors.yellow[800] : null),
-                              onTap: () {
-                                setState(() {
-                                  if (isSaved == false) {
-                                    isSaved = true;
-                                  } else {
-                                    isSaved = false;
-                                  }
-                                });
-                              },
-                            ),
-                            Spacer(),
-                          ],
-                        )),
-                        
-                  ],
+                    // Image.asset(
+                    //   'asset/images/bg3.png',
+                    //   height: 700,
+                    //   width: 400,
+                    // ),
+                  ),
                 ),
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
