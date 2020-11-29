@@ -11,110 +11,109 @@ class _SettingdictionaryState extends State<Settingdictionary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.grey[200],
-        child: Column(
-          children: [
-            Container(
-              color: Colors.lightBlue,
-              width: 500,
-              height: 100,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: Center(
-                  child: Text(
-                    'Setting',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
+      backgroundColor: Color.fromRGBO(216, 236, 228, 10),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            width: 500,
+            height: 110,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 290, top: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipOval(
+                        child: Material(
+                          color: Colors.blue[900], // button color
+                          child: InkWell(
+                            splashColor: Colors.red, // inkwell color
+                            child: SizedBox(
+                                width: 52,
+                                height: 52,
+                                child: Icon(
+                                  Icons.history,
+                                  size: 40,
+                                  color: Colors.white,
+                                )),
+                            onTap: () {},
+                          ),
+                        ),
+                      ),
+                      Text('HISTORY'),
+                    ],
                   ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipOval(
+                        child: Material(
+                          color: Colors.blue[500], // button color
+                          child: InkWell(
+                            splashColor: Colors.red, // inkwell color
+                            child: SizedBox(
+                                width: 52,
+                                height: 52,
+                                child: Icon(
+                                  Icons.star,
+                                  size: 35,
+                                  color: Colors.white,
+                                )),
+                            onTap: () {},
+                          ),
+                        ),
+                      ),
+                      Text('MY FAVARITE')
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Container(
-              width: 500,
-              height: 70,
+          ),
+          SizedBox(height: 60,),
+          Container(
+            width: 400,
+            height: 80,
+            child: RaisedButton(
               color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  children: [
-                    Text(
-                      'Language',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    Spacer(),
-                    IconButton(
-                        icon: Icon(Icons.arrow_forward_ios), onPressed: () {}),
-                  ],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              onPressed: () {},
+              child: Text(
+                'ENGLISH / ภาษาไทย',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black,
                 ),
               ),
             ),
-            Spacer(),
-            Container(
-              width: 500,
-              height: 70,
+          ),
+          SizedBox(height: 10,),
+          Container(
+            width: 400,
+            height: 80,
+            child: RaisedButton(
               color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  children: [
-                    Text(
-                      'Font Size',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    Spacer(),
-                    IconButton(
-                        icon: Icon(Icons.arrow_forward_ios),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Fontsize(),
-                            ),
-                          );
-                        }),
-                  ],
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              onPressed: () {},
+              child: Text(
+                'Contact us',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black,
                 ),
               ),
             ),
-            Spacer(),
-            Container(
-              width: 500,
-              height: 70,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  children: [
-                    Text(
-                      'Favorite',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    Spacer(),
-                     IconButton(
-                        icon: Icon(Icons.arrow_forward_ios),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Favorite(),
-                            ),
-                          );
-                        }),
-                  ],
-                ),
-              ),
-            ),
-            Spacer(
-              flex: 190,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
