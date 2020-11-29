@@ -196,7 +196,7 @@ class _GameDemoState extends State<GameDemo> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 80),
+                padding: const EdgeInsets.only(top: 50),
                 child: Column(
                   children: [
                     Image.asset(
@@ -206,7 +206,11 @@ class _GameDemoState extends State<GameDemo> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("time  = ${_reduce.toStringAsFixed(1)}"),
+                        Text(
+                          "      ${_reduce.toStringAsFixed(1)}",
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
                         IconButton(
                             icon: Icon(Icons.refresh),
                             onPressed: () {
@@ -221,7 +225,7 @@ class _GameDemoState extends State<GameDemo> {
                 width: 180,
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 65),
+                padding: const EdgeInsets.only(top: 65, right: 30),
                 child: Column(
                   children: [
                     Image.asset(
@@ -231,7 +235,11 @@ class _GameDemoState extends State<GameDemo> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text("score  = $count"),
+                    Text(
+                      "$count",
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
               ),
@@ -246,13 +254,13 @@ class _GameDemoState extends State<GameDemo> {
                 alignment: Alignment.center,
                 child: Image.asset(
                   'asset/images/bg.png',
-                  height: 100,
+                  height: 150,
                   width: 500,
                   fit: BoxFit.cover,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 5, left: 0),
+                padding: const EdgeInsets.only(top: 25, left: 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -264,26 +272,10 @@ class _GameDemoState extends State<GameDemo> {
                       height: 80,
                       width: 250,
                       child: Text(
-                        quesion+" ?",
+                        quesion + " ?",
                         style: TextStyle(fontSize: 30),
                       ),
                     )
-                    // Container(
-                    //   height: 40,
-                    //   width: 220,
-                    //   child: ListView(
-                    //     scrollDirection: Axis.horizontal,
-                    //     children: [
-                    //       Container(
-                    //         child: Text(
-                    //           quesion + "isusususususus ?",
-                    //           style: TextStyle(
-                    //               fontSize: 30, fontWeight: FontWeight.bold),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
