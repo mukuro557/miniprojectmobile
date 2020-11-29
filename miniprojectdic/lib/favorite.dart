@@ -12,11 +12,32 @@ class _FavoriteState extends State<Favorite> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(216, 236, 228, 5),
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            'HISTORY',
-            style: TextStyle(color: Colors.black, fontSize: 25),
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ClipOval(
+              child: Material(
+                color: Colors.blue[500], // button color
+                child: InkWell(
+                  child: SizedBox(
+                      width: 36,
+                      height: 36,
+                      child: Icon(
+                        Icons.star,
+                        size: 30,
+                        color: Colors.yellow,
+                      )),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              'FAVORITE',
+              style: TextStyle(color: Colors.black, fontSize: 25),
+            ),
+          ],
         ),
         elevation: 0,
         backgroundColor: Color.fromRGBO(230, 236, 228, 50),
@@ -63,6 +84,7 @@ class _FavoriteState extends State<Favorite> {
                                               'apple melmon',
                                               style: TextStyle(
                                                 fontSize: 20,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                             ),
                                           ),
@@ -119,8 +141,8 @@ class _FavoriteState extends State<Favorite> {
                                             child: Text(
                                               'apple melmon',
                                               style: TextStyle(
-                                                fontSize: 20,
-                                              ),
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ),
                                         ],
