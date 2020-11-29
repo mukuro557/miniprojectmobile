@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:miniprojectdic/game.dart';
@@ -5,7 +7,6 @@ import 'search.dart';
 import 'package:miniprojectdic/home.dart';
 import 'package:miniprojectdic/setting.dart';
 import 'package:miniprojectdic/speech.dart';
-
 
 class Mainpagedictionary extends StatefulWidget {
   @override
@@ -20,46 +21,75 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
       child: Scaffold(
         bottomNavigationBar: Container(
           color: Colors.white,
+          height: 100,
           child: TabBar(
             tabs: [
               Tab(
-                child: Text(
-                  'Home',
-                  style: TextStyle(color: Colors.lightBlue),
-                ),
-                icon: Icon(
-                  Icons.home,
-                  color: Colors.lightBlue,
-                ),
-              ),
-              Tab(
-                icon: Icon(
-                  Icons.mic,
-                  color: Colors.lightBlue,
-                ),
-                child: Text(
-                  'Speech',
-                  style: TextStyle(color: Colors.lightBlue),
+                child: ClipOval(
+                  child: Material(
+                    color: Color.fromRGBO(216, 236, 228, 10), // button color
+                    child: InkWell(
+                      splashColor: Colors.red, // inkwell color
+                      child: SizedBox(
+                          width: 56,
+                          height: 56,
+                          child: Image.asset(
+                            'asset/images/home.png',
+                            scale: 2.0,
+                          )),
+                    ),
+                  ),
                 ),
               ),
               Tab(
-                icon: Icon(
-                  Icons.games,
-                  color: Colors.lightBlue,
-                ),
-                child: Text(
-                  'Game',
-                  style: TextStyle(color: Colors.lightBlue),
+                child: ClipOval(
+                  child: Material(
+                    color: Color.fromRGBO(216, 236, 228, 10), // button color
+                    child: InkWell(
+                      splashColor: Colors.red, // inkwell color
+                      child: SizedBox(
+                          width: 56,
+                          height: 56,
+                          child: Image.asset(
+                            'asset/images/voice.png',
+                            scale: 2.5,
+                          )),
+                    ),
+                  ),
                 ),
               ),
               Tab(
-                icon: Icon(
-                  Icons.settings,
-                  color: Colors.lightBlue,
+                child: ClipOval(
+                  child: Material(
+                    color: Color.fromRGBO(216, 236, 228, 10), // button color
+                    child: InkWell(
+                      splashColor: Colors.red, // inkwell color
+                      child: SizedBox(
+                          width: 56,
+                          height: 56,
+                          child: Image.asset(
+                            'asset/images/game.png',
+                            scale: 2.5,
+                          )),
+                    ),
+                  ),
                 ),
-                child: Text(
-                  'Settings',
-                  style: TextStyle(color: Colors.lightBlue),
+              ),
+              Tab(
+                child: ClipOval(
+                  child: Material(
+                    color: Color.fromRGBO(216, 236, 228, 10), // button color
+                    child: InkWell(
+                      splashColor: Colors.red, // inkwell color
+                      child: SizedBox(
+                          width: 56,
+                          height: 56,
+                          child: Image.asset(
+                            'asset/images/profile.png',
+                            scale: 2.5,
+                          )),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -70,9 +100,7 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
             child: Homepage(),
             color: Colors.yellow,
           ),
-          Container(
-            child: Speech()
-          ),
+          Container(child: Speech()),
           Container(
             child: GameDemo(),
             color: Colors.orange,
