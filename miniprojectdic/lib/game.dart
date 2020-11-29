@@ -127,101 +127,306 @@ class _GameDemoState extends State<GameDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Game'),
-      ),
+      backgroundColor: Color.fromRGBO(216, 236, 228, 10),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 50),
+          Container(
+            color: Colors.white,
+            width: 500,
+            height: 110,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("time  = ${_reduce.toStringAsFixed(1)}"),
-                IconButton(
-                    icon: Icon(Icons.refresh),
-                    onPressed: () {
-                      checktime();
-                    })
+                Padding(
+                  padding: const EdgeInsets.only(right: 290, top: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipOval(
+                        child: Material(
+                          color: Colors.blue[900], // button color
+                          child: InkWell(
+                            splashColor: Colors.red, // inkwell color
+                            child: SizedBox(
+                                width: 52,
+                                height: 52,
+                                child: Icon(
+                                  Icons.history,
+                                  size: 40,
+                                  color: Colors.white,
+                                )),
+                            onTap: () {},
+                          ),
+                        ),
+                      ),
+                      Text('HISTORY'),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipOval(
+                        child: Material(
+                          color: Colors.blue[500], // button color
+                          child: InkWell(
+                            splashColor: Colors.red, // inkwell color
+                            child: SizedBox(
+                                width: 52,
+                                height: 52,
+                                child: Icon(
+                                  Icons.star,
+                                  size: 35,
+                                  color: Colors.white,
+                                )),
+                            onTap: () {},
+                          ),
+                        ),
+                      ),
+                      Text('MY FAVARITE')
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 50),
-            child: Text("score  = $count"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 80),
+                child: Column(
+                  children: [
+                    Image.asset(
+                      'asset/images/time.png',
+                      scale: 2.5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("time  = ${_reduce.toStringAsFixed(1)}"),
+                        IconButton(
+                            icon: Icon(Icons.refresh),
+                            onPressed: () {
+                              checktime();
+                            })
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 180,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 65),
+                child: Column(
+                  children: [
+                    Image.asset(
+                      'asset/images/scoring.png',
+                      scale: 2.5,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text("score  = $count"),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Text(quesion + " ?"),
-          Padding(
-            padding: const EdgeInsets.only(top: 40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Spacer(),
-                Container(
-                  width: 150,
-                  child: RaisedButton(
-                    onPressed: () {
-                      if (_reduce > 0 && _reduce != 1) {
-                        if (_button == 1) {
-                          clickable();
-                          _randomleftright();
-                          _randomword();
-
-                          (() async {
-                            await helper.opendb();
-                            _getNames();
-                          })();
-                          _mode();
-                        } else {
-                          _randomleftright();
-                          _randomword();
-
-                          (() async {
-                            await helper.opendb();
-                            _getNames();
-                          })();
-                          _mode();
-                        }
-                      }
-                    },
-                    child: Text(left),
-                  ),
+          SizedBox(
+            height: 25,
+          ),
+          Stack(
+            children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  'asset/images/bg.png',
+                  height: 100,
+                  width: 500,
+                  fit: BoxFit.cover,
                 ),
-                Spacer(),
-                Container(
-                  width: 150,
-                  child: RaisedButton(
-                    onPressed: () {
-                      if (_reduce > 0 && _reduce != 1) {
-                        if (_button == 2) {
-                          clickable();
-                          _randomleftright();
-                          _randomword();
-
-                          (() async {
-                            await helper.opendb();
-                            _getNames();
-                          })();
-                          _mode();
-                        } else {
-                          _randomleftright();
-                          _randomword();
-
-                          (() async {
-                            await helper.opendb();
-                            _getNames();
-                          })();
-                          _mode();
-                        }
-                      }
-                    },
-                    child: Text(right),
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5, left: 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 80,
+                      height: 65,
+                    ),
+                    Container(
+                      height: 80,
+                      width: 250,
+                      child: Text(
+                        quesion+" ?",
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    )
+                    // Container(
+                    //   height: 40,
+                    //   width: 220,
+                    //   child: ListView(
+                    //     scrollDirection: Axis.horizontal,
+                    //     children: [
+                    //       Container(
+                    //         child: Text(
+                    //           quesion + "isusususususus ?",
+                    //           style: TextStyle(
+                    //               fontSize: 30, fontWeight: FontWeight.bold),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                  ],
                 ),
-                Spacer(),
-              ],
+              ),
+            ],
+          ),
+          Spacer(
+            flex: 2,
+          ),
+          Container(
+            width: 350,
+            height: 100,
+            child: RaisedButton(
+              color: Color.fromRGBO(208, 233, 231, 1),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(80)),
+              onPressed: () {
+                if (_reduce > 0 && _reduce != 1) {
+                  if (_button == 1) {
+                    clickable();
+                    _randomleftright();
+                    _randomword();
+
+                    (() async {
+                      await helper.opendb();
+                      _getNames();
+                    })();
+                    _mode();
+                  } else {
+                    _randomleftright();
+                    _randomword();
+
+                    (() async {
+                      await helper.opendb();
+                      _getNames();
+                    })();
+                    _mode();
+                  }
+                }
+              },
+              child: Text(
+                left,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black,
+                  shadows: [
+                    Shadow(
+                        offset: Offset(
+                          -1.5,
+                          -1.5,
+                        ),
+                        color: Colors.white),
+                    Shadow(
+                        offset: Offset(
+                          1.5,
+                          -1.5,
+                        ),
+                        color: Colors.white),
+                    Shadow(
+                        offset: Offset(
+                          -1.5,
+                          1.5,
+                        ),
+                        color: Colors.white),
+                    Shadow(
+                        offset: Offset(
+                          1.5,
+                          1.5,
+                        ),
+                        color: Colors.white),
+                  ],
+                ),
+              ),
             ),
+          ),
+          Spacer(),
+          Container(
+            width: 350,
+            height: 100,
+            child: RaisedButton(
+              color: Color.fromRGBO(208, 233, 231, 1),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(80)),
+              onPressed: () {
+                if (_reduce > 0 && _reduce != 1) {
+                  if (_button == 2) {
+                    clickable();
+                    _randomleftright();
+                    _randomword();
+
+                    (() async {
+                      await helper.opendb();
+                      _getNames();
+                    })();
+                    _mode();
+                  } else {
+                    _randomleftright();
+                    _randomword();
+
+                    (() async {
+                      await helper.opendb();
+                      _getNames();
+                    })();
+                    _mode();
+                  }
+                }
+              },
+              child: Text(
+                right,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black,
+                  shadows: [
+                    Shadow(
+                        offset: Offset(
+                          -1.5,
+                          -1.5,
+                        ),
+                        color: Colors.white),
+                    Shadow(
+                        offset: Offset(
+                          1.5,
+                          -1.5,
+                        ),
+                        color: Colors.white),
+                    Shadow(
+                        offset: Offset(
+                          -1.5,
+                          1.5,
+                        ),
+                        color: Colors.white),
+                    Shadow(
+                        offset: Offset(
+                          1.5,
+                          1.5,
+                        ),
+                        color: Colors.white),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Spacer(
+            flex: 2,
           ),
         ],
       ),
