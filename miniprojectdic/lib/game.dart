@@ -86,8 +86,8 @@ class _GameDemoState extends State<GameDemo> {
 
   _randomword() {
     setState(() {
-      _wordans = Random().nextInt(45);
-      _wordque = Random().nextInt(45);
+      _wordans = Random().nextInt(80000);
+      _wordque = Random().nextInt(80000);
     });
 
     if (_wordans == _wordque) {
@@ -215,6 +215,9 @@ class _GameDemoState extends State<GameDemo> {
                             icon: Icon(Icons.refresh),
                             onPressed: () {
                               checktime();
+                              _randomleftright();
+                              _randomword();
+                              _getNames();
                             })
                       ],
                     ),
