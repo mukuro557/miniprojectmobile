@@ -16,9 +16,10 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   final FlutterTts flutterTts = FlutterTts();
   String eng = 'abhorrence';
-  String th = '';
-  String ecat = "";
-  String esyn = "";
+  String th1 =
+      'การเปิดเทปให้ดูใหม่อีกครั้ง  เช่น ภาพการแข่งขันกีฬา โดยมากมักจะเป็นภาพเคลื่อนไหวช้า ๆ ให้ดูกันใหม่';
+  String ecat = "[N]";
+  String esyn = "authorize; give credentials to; certify";
   String ethai = "";
   var data = [];
   bool isSaved = false;
@@ -44,7 +45,7 @@ class _HomepageState extends State<Homepage> {
     await flutterTts.setLanguage("th-TH");
     await flutterTts.setPitch(1);
     print(await flutterTts.getVoices);
-    await flutterTts.speak(th);
+    await flutterTts.speak(th1);
   }
 
   _HomepageState() {
@@ -56,35 +57,40 @@ class _HomepageState extends State<Homepage> {
         border: InputBorder.none,
       ),
       suggestions: suggestions,
-      textChanged: (text) => currentText = text,
       clearOnSubmit: true,
+      textChanged: (text) => currentText = text,
       textSubmitted: (text) => setState(() {
         if (text != "") {
           added.insert(0, text);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Vocab(),
-            ),
-          );
-          save();
-          print(added);
+          _data();
         }
       }),
     );
   }
-  removeinfo() async {
-    SharedPreferences history = await SharedPreferences.getInstance();
-    history.remove("history");
-  }
 
-  check() async {
-    SharedPreferences history = await SharedPreferences.getInstance();
-    var dataofStore = history.getStringList("history");
-    print(dataofStore);
-
-    await setState(() {
-      data = dataofStore;
+  _data() async {
+    dataB = await helper.finddb(added[0]);
+    setState(() {
+      if (dataB[0]['esearch'] == null) {
+        eng = "";
+      } else {
+        eng = dataB[0]['esearch'];
+      }
+      if (dataB[0]['tentry'] == null) {
+        th1 = '';
+      } else {
+        th1 = dataB[0]['tentry'];
+      }
+      if (dataB[0]['ecat'] == null) {
+        ecat = '';
+      } else {
+        ecat = dataB[0]['ecat'];
+      }
+      if (dataB[0]['esyn'] == null) {
+        esyn = '';
+      } else {
+        esyn = dataB[0]['esyn'];
+      }
     });
   }
 
@@ -110,7 +116,6 @@ class _HomepageState extends State<Homepage> {
     (() async {
       await helper.opendb();
       await _getNames();
-      await check();
     })();
   }
 
@@ -191,6 +196,15 @@ class _HomepageState extends State<Homepage> {
               trailing: new IconButton(
                 icon: new Icon(Icons.search),
                 onPressed: () async {
+                  //         Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => Vocab(),
+                  //   ),
+                  // );
+                  print(added[0]);
+                  _data();
+
                   textField.triggerSubmitted();
                   showWhichErrorText = !showWhichErrorText;
                   textField.updateDecoration(
@@ -273,7 +287,7 @@ class _HomepageState extends State<Homepage> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
-                                child: Text('[N]'),
+                                child: Text(ecat),
                               ),
                               SizedBox(
                                 width: 10,
@@ -330,8 +344,7 @@ class _HomepageState extends State<Homepage> {
                                   scrollDirection: Axis.horizontal,
                                   children: [
                                     Container(
-                                      child: Text(
-                                          'การเปิดเทปให้ดูใหม่อีกครั้ง  เช่น ภาพการแข่งขันกีฬา โดยมากมักจะเป็นภาพเคลื่อนไหวช้า ๆ ให้ดูกันใหม่'),
+                                      child: Text(th1),
                                     ),
                                   ],
                                 ),
@@ -348,8 +361,7 @@ class _HomepageState extends State<Homepage> {
                                   scrollDirection: Axis.horizontal,
                                   children: [
                                     Container(
-                                      child: Text(
-                                          'authorize; give credentials to; certify'),
+                                      child: Text(esyn),
                                     ),
                                   ],
                                 ),
