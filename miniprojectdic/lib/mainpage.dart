@@ -3,10 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:miniprojectdic/game.dart';
-import 'search.dart';
 import 'package:miniprojectdic/home.dart';
 import 'package:miniprojectdic/setting.dart';
-import 'package:miniprojectdic/speech.dart';
+import 'package:miniprojectdic/gamesec.dart';
 
 class Mainpagedictionary extends StatefulWidget {
   @override
