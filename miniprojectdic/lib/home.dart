@@ -40,6 +40,9 @@ class _HomepageState extends State<Homepage> {
   var fav = [
     {"esearch": '', "tentry": ''}
   ];
+  var his = [
+    {"esearch": '', "tentry": ''}
+  ];
 
   Future _speakeng() async {
     await flutterTts.setLanguage("en-US");
@@ -74,11 +77,35 @@ class _HomepageState extends State<Homepage> {
       }),
     );
   }
+
   Future _savefav() async {
     fav[fav.length - 1]['esearch'] = eng;
     fav[fav.length - 1]['tentry'] = th1;
     fav.add({});
     _checkfavor();
+  }
+
+  _checkhis() {
+    int histry = 0;
+    bool chec = false;
+    setState(() {
+      for (int i = 0; i < his.length; i++) {
+        if (eng == his[i]['esearch']) {
+          histry = i;
+          chec = true;
+          break;
+        } else {
+          chec = false;
+        }
+      }
+      if (chec) {
+        his.removeAt(histry);
+      }
+      his[his.length - 1]['esearch'] = eng;
+      his[his.length - 1]['tentry'] = th1;
+      his.add({});
+    });
+    print(his);
   }
 
   _checkfavor() {
@@ -119,6 +146,13 @@ class _HomepageState extends State<Homepage> {
       }
     });
     _checkfavor();
+    _checkhis();
+  }
+
+  history() async {
+    SharedPreferences history = await SharedPreferences.getInstance();
+    var info = jsonEncode(his);
+    history.setString('his', info);
   }
 
   favorite() async {
@@ -178,6 +212,7 @@ class _HomepageState extends State<Homepage> {
                                 color: Colors.white,
                               )),
                           onTap: () {
+                            history();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

@@ -25,8 +25,6 @@ class _FavoriteState extends State<Favorite> {
       fav.add({});
     }
     });
-   
-    print(fav);
   }
 
   @override
