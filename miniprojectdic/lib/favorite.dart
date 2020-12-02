@@ -60,133 +60,63 @@ class _FavoriteState extends State<Favorite> {
                     width: 420,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Row(
-                              //Row ของคอลัมตัวอักษรอังกฤษกับไทย
-                              children: [
-                                Row(
-                                  //คอลัมอังกฤษ
-                                  children: [
-                                    SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                                    Container(
-                                      height: 30,
-                                      width: 80,
-                                      child: ListView(
-                                        scrollDirection: Axis.horizontal,
-                                        children: [
-                                          Container(
-                                            child: Text(
-                                              'apple melmon',
-                                              style: TextStyle(
+                      child: ListView.builder(
+                        itemCount: 2,
+                        itemBuilder: (context, index) {
+                          return SingleChildScrollView(
+                              child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                    height: 50,
+                                  ),
+                                  Container(
+                                    height: 30,
+                                    width: 125,
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: [
+                                        Container(
+                                          child: Text(
+                                            'apple melmon',
+                                            style: TextStyle(
                                                 fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                    height: 50,
+                                  ),
+                                  Container(
+                                    height: 29,
+                                    width: 230,
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: [
+                                        Container(
+                                          child: Text(
+                                            'แอปเปิ้ล มะนาว กล้วย ส้ม',
+                                            style: TextStyle(
+                                              fontSize: 20,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                                Row(
-                                  //คอลัมไทย
-                                  children: [
-                                    SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                                    Container(
-                                      height: 29,
-                                      width: 200,
-                                      child: ListView(
-                                        scrollDirection: Axis.horizontal,
-                                        children: [
-                                          Container(
-                                            child: Text(
-                                              'แอปเปิ้ล มะนาว กล้วย ส้ม',
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Row(
-                              //Row ของคอลัมตัวอักษรอังกฤษกับไทย
-                              children: [
-                                Row(
-                                  //คอลัมอังกฤษ
-                                  children: [
-                                    SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                                    Container(
-                                      height: 30,
-                                      width: 80,
-                                      child: ListView(
-                                        scrollDirection: Axis.horizontal,
-                                        children: [
-                                          Container(
-                                            child: Text(
-                                              'apple melmon',
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  //คอลัมไทย
-                                  children: [
-                                    SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                                    Container(
-                                      height: 29,
-                                      width: 200,
-                                      child: ListView(
-                                        scrollDirection: Axis.horizontal,
-                                        children: [
-                                          Container(
-                                            child: Text(
-                                              'แอปเปิ้ล มะนาว กล้วย ส้ม',
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ));
+                        },
                       ),
                     ),
-                    // Image.asset(
-                    //   'asset/images/bg3.png',
-                    //   height: 700,
-                    //   width: 400,
-                    // ),
                   ),
                 ),
               ),

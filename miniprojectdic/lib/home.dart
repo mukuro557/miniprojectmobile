@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:miniprojectdic/favorite.dart';
 import 'package:miniprojectdic/gamesec.dart';
+import 'package:miniprojectdic/history.dart';
 import 'package:miniprojectdic/sqlitehelp.dart';
 import 'package:miniprojectdic/vocab.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,7 +36,10 @@ class _HomepageState extends State<Homepage> {
   List<Map<String, dynamic>> dataA = [];
   List<Map<String, dynamic>> dataB = [];
   List<String> suggestions = [];
-  int _length;
+  bool checkdup = true;
+  var fav = [
+    {"esearch": '', "tentry": ''}
+  ];
 
   Future _speakeng() async {
     await flutterTts.setLanguage("en-US");
@@ -67,6 +74,26 @@ class _HomepageState extends State<Homepage> {
       }),
     );
   }
+  Future _savefav() async {
+    fav[fav.length - 1]['esearch'] = eng;
+    fav[fav.length - 1]['tentry'] = th1;
+    fav.add({});
+    print(fav);
+    _checkfavor();
+  }
+
+  _checkfavor() {
+    setState(() {
+      for (int i = 0; i < fav.length; i++) {
+        if (eng == fav[i]['esearch']) {
+          checkdup = false;
+          break;
+        } else {
+          checkdup = true;
+        }
+      }
+    });
+  }
 
   _data() async {
     dataB = await helper.finddb(added[0]);
@@ -92,11 +119,13 @@ class _HomepageState extends State<Homepage> {
         esyn = dataB[0]['esyn'];
       }
     });
+    _checkfavor();
   }
 
-  save() async {
-    SharedPreferences history = await SharedPreferences.getInstance();
-    history.setStringList("history", added);
+  favorite() async {
+    SharedPreferences favorite = await SharedPreferences.getInstance();
+    var info = jsonEncode(fav);
+    favorite.setString('fav', info);
   }
 
   SimpleAutoCompleteTextField textField;
@@ -117,6 +146,7 @@ class _HomepageState extends State<Homepage> {
       await helper.opendb();
       await _getNames();
     })();
+    _checkfavor();
   }
 
   @override
@@ -148,7 +178,12 @@ class _HomepageState extends State<Homepage> {
                                 size: 40,
                                 color: Colors.white,
                               )),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => History()));
+                          },
                         ),
                       ),
                     ),
@@ -174,7 +209,12 @@ class _HomepageState extends State<Homepage> {
                                 size: 35,
                                 color: Colors.white,
                               )),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Favorite()));
+                          },
                         ),
                       ),
                     ),
@@ -196,12 +236,6 @@ class _HomepageState extends State<Homepage> {
               trailing: new IconButton(
                 icon: new Icon(Icons.search),
                 onPressed: () async {
-                  //         Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Vocab(),
-                  //   ),
-                  // );
                   print(added[0]);
                   _data();
 
@@ -242,7 +276,7 @@ class _HomepageState extends State<Homepage> {
                           Padding(
                             padding: const EdgeInsets.only(left: 120, top: 60),
                             child: Text(
-                              'Word of the day',
+                              'Tranlate',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 22.0,
@@ -314,20 +348,42 @@ class _HomepageState extends State<Homepage> {
                               ),
                               ClipOval(
                                 child: Material(
-                                  color: Colors.blue[600], // button color
-                                  child: InkWell(
-                                    splashColor: Colors.red, // inkwell color
-                                    child: SizedBox(
-                                        width: 36,
-                                        height: 36,
-                                        child: Icon(
-                                          Icons.star,
-                                          size: 25,
-                                          color: Colors.white,
-                                        )),
-                                    onTap: () {},
-                                  ),
-                                ),
+                                    color: Colors.blue[600], // button color
+                                    child: checkdup
+                                        ? InkWell(
+                                            splashColor:
+                                                Colors.red, // inkwell color
+                                            child: SizedBox(
+                                                width: 36,
+                                                height: 36,
+                                                child: Icon(
+                                                  Icons.star,
+                                                  size: 25,
+                                                  color: Colors.white,
+                                                )),
+                                            onTap: () {
+                                              _savefav();
+                                            }
+                                            // _savefav();
+                                            )
+                                        : Container(
+                                            color: Colors.black,
+                                            child: InkWell(
+                                                splashColor: Colors
+                                                    .black, // inkwell color
+                                                child: SizedBox(
+                                                    width: 36,
+                                                    height: 36,
+                                                    child: Icon(
+                                                      Icons.star,
+                                                      size: 25,
+                                                      color: Colors.white,
+                                                    )),
+                                                onTap: null
+                                                // _savefav();
+
+                                                ),
+                                          )),
                               ),
                             ],
                           ),
