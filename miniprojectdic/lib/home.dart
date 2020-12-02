@@ -44,6 +44,32 @@ class _HomepageState extends State<Homepage> {
     {"esearch": '', "tentry": ''}
   ];
 
+  getfaver() async {
+    SharedPreferences favorite = await SharedPreferences.getInstance();
+    var info = favorite.getString('fav');
+    var into = jsonDecode(info);
+    setState(() {
+      for (int i = 0; i < into.length - 1; i++) {
+        fav[i]['esearch'] = into[i]['esearch'];
+        fav[i]['tentry'] = into[i]['tentry'];
+        fav.add({});
+      }
+    });
+  }
+
+  gethis() async {
+    SharedPreferences history = await SharedPreferences.getInstance();
+    var info = history.getString('his');
+    var into = jsonDecode(info);
+    setState(() {
+      for (int i = 0; i < into.length - 1; i++) {
+        his[i]['esearch'] = into[i]['esearch'];
+        his[i]['tentry'] = into[i]['tentry'];
+        his.add({});
+      }
+    });
+  }
+
   Future _speakeng() async {
     await flutterTts.setLanguage("en-US");
     await flutterTts.setPitch(1);
@@ -180,6 +206,8 @@ class _HomepageState extends State<Homepage> {
       await _getNames();
     })();
     _checkfavor();
+    getfaver();
+    gethis();
   }
 
   @override
