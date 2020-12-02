@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Favorite extends StatefulWidget {
   @override
@@ -7,6 +10,32 @@ class Favorite extends StatefulWidget {
 
 class _FavoriteState extends State<Favorite> {
   bool isSaved = false;
+  var fav = [
+    {"esearch": '', "tentry": ''}
+  ];
+
+  getfaver() async {
+    SharedPreferences favorite = await SharedPreferences.getInstance();
+    var info = favorite.getString('fav');
+    var into = jsonDecode(info);
+    setState(() {
+       for (int i = 0; i < into.length-1; i++) {
+      fav[i]['esearch'] = into[i]['esearch'];
+      fav[i]['tentry'] = into[i]['tentry'];
+      fav.add({});
+    }
+    });
+   
+    print(fav);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getfaver();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,8 +90,8 @@ class _FavoriteState extends State<Favorite> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: ListView.builder(
-                        itemCount: 2,
-                        itemBuilder: (context, index) {
+                        itemCount: fav.length-1,
+                        itemBuilder: (context,int index) {
                           return SingleChildScrollView(
                               child: Column(
                             children: [
@@ -80,7 +109,7 @@ class _FavoriteState extends State<Favorite> {
                                       children: [
                                         Container(
                                           child: Text(
-                                            'apple melmon',
+                                            fav[index]['esearch'],
                                             style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold),
@@ -101,7 +130,7 @@ class _FavoriteState extends State<Favorite> {
                                       children: [
                                         Container(
                                           child: Text(
-                                            'แอปเปิ้ล มะนาว กล้วย ส้ม',
+                                             fav[index]['tentry'],
                                             style: TextStyle(
                                               fontSize: 20,
                                             ),

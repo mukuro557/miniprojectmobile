@@ -78,7 +78,6 @@ class _HomepageState extends State<Homepage> {
     fav[fav.length - 1]['esearch'] = eng;
     fav[fav.length - 1]['tentry'] = th1;
     fav.add({});
-    print(fav);
     _checkfavor();
   }
 
@@ -210,6 +209,7 @@ class _HomepageState extends State<Homepage> {
                                 color: Colors.white,
                               )),
                           onTap: () {
+                            favorite();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
