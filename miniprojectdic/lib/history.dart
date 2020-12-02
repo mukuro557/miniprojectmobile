@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,6 +24,17 @@ class _HistoryState extends State<History> {
         his.add({});
       }
     });
+  }
+
+  _clearhis() async {
+    SharedPreferences history = await SharedPreferences.getInstance();
+    history.remove('his');
+    setState(() {
+       his = [
+      {"esearch": '', "tentry": ''}
+    ];
+    });
+   
   }
 
   @override
@@ -64,6 +74,15 @@ class _HistoryState extends State<History> {
               'HISTORY',
               style: TextStyle(color: Colors.black, fontSize: 25),
             ),
+            SizedBox(
+              width: 5,
+            ),
+            FlatButton.icon(
+                onPressed: () {
+                  _clearhis();
+                },
+                icon: Icon(Icons.replay),
+                label: Text("clear history"))
           ],
         ),
         elevation: 0,
@@ -86,61 +105,61 @@ class _HistoryState extends State<History> {
                     height: 580,
                     width: 420,
                     child: ListView.builder(
-                        itemCount: his.length-1,
-                        itemBuilder: (context,int index) {
-                          return SingleChildScrollView(
-                              child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 10,
-                                    height: 50,
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    width: 125,
-                                    child: ListView(
-                                      scrollDirection: Axis.horizontal,
-                                      children: [
-                                        Container(
-                                          child: Text(
-                                            his[index]['esearch'],
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                    height: 50,
-                                  ),
-                                  Container(
-                                    height: 29,
-                                    width: 230,
-                                    child: ListView(
-                                      scrollDirection: Axis.horizontal,
-                                      children: [
-                                        Container(
-                                          child: Text(
-                                             his[index]['tentry'],
-                                            style: TextStyle(
+                      itemCount: his.length - 1,
+                      itemBuilder: (context, int index) {
+                        return SingleChildScrollView(
+                            child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 10,
+                                  height: 50,
+                                ),
+                                Container(
+                                  height: 30,
+                                  width: 125,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      Container(
+                                        child: Text(
+                                          his[index]['esearch'],
+                                          style: TextStyle(
                                               fontSize: 20,
-                                            ),
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                  height: 50,
+                                ),
+                                Container(
+                                  height: 29,
+                                  width: 230,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      Container(
+                                        child: Text(
+                                          his[index]['tentry'],
+                                          style: TextStyle(
+                                            fontSize: 20,
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ],
-                          ));
-                        },
-                      ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ));
+                      },
+                    ),
                   ),
                 ),
               ),

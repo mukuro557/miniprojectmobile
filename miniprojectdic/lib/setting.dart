@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:miniprojectdic/favorite.dart';
 import 'package:miniprojectdic/fontsize.dart';
+import 'package:miniprojectdic/history.dart';
 
 class Settingdictionary extends StatefulWidget {
   @override
@@ -39,7 +42,10 @@ class _SettingdictionaryState extends State<Settingdictionary> {
                                   size: 40,
                                   color: Colors.white,
                                 )),
-                            onTap: () {},
+                            onTap: () {Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => History()));},
                           ),
                         ),
                       ),
@@ -65,7 +71,10 @@ class _SettingdictionaryState extends State<Settingdictionary> {
                                   size: 35,
                                   color: Colors.white,
                                 )),
-                            onTap: () {},
+                            onTap: () {Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Favorite()));},
                           ),
                         ),
                       ),
@@ -76,41 +85,29 @@ class _SettingdictionaryState extends State<Settingdictionary> {
               ],
             ),
           ),
-          SizedBox(height: 60,),
-          Container(
-            width: 400,
-            height: 80,
-            child: RaisedButton(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              onPressed: () {},
-              child: Text(
-                'ENGLISH / ภาษาไทย',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                ),
-              ),
-            ),
+          SizedBox(
+            height: 60,
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Container(
             width: 400,
-            height: 80,
-            child: RaisedButton(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)),
-              onPressed: () {},
-              child: Text(
-                'Contact us',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
+            decoration: new BoxDecoration(
+                borderRadius: new BorderRadius.circular(20),
+                color: Colors.white),
+            height: 500,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Text("Contact us",style: TextStyle(fontSize: 30),),
                 ),
-              ),
+                Text("6131302005@lamduan.mfu.ac.th"),
+                Text("6131302010@lamduan.mfu.ac.th"),
+                Text("6131301016@lamduan.mfu.ac.th"),
+                Text("5931301063@lamduan.mfu.ac.th")
+              ],
             ),
           ),
         ],

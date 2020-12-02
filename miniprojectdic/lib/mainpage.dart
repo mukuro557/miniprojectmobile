@@ -16,7 +16,7 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         bottomNavigationBar: Container(
           color: Colors.white,
@@ -40,23 +40,7 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
                   ),
                 ),
               ),
-              Tab(
-                child: ClipOval(
-                  child: Material(
-                    color: Color.fromRGBO(216, 236, 228, 10), // button color
-                    child: InkWell(
-                      splashColor: Colors.red, // inkwell color
-                      child: SizedBox(
-                          width: 56,
-                          height: 56,
-                          child: Image.asset(
-                            'asset/images/voice.png',
-                            scale: 2.5,
-                          )),
-                    ),
-                  ),
-                ),
-              ),
+              
               Tab(
                 child: ClipOval(
                   child: Material(
@@ -99,7 +83,7 @@ class _MainpagedictionaryState extends State<Mainpagedictionary> {
             child: Homepage(),
             color: Colors.yellow,
           ),
-          Container(child: Speech()),
+          
           Container(
             child: GameDemo(),
             color: Colors.orange,
