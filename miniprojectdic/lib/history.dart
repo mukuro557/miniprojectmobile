@@ -15,26 +15,28 @@ class _HistoryState extends State<History> {
 
   getfaver() async {
     SharedPreferences history = await SharedPreferences.getInstance();
-    var info = history.getString('his');
-    var into = jsonDecode(info);
-    setState(() {
-      for (int i = 0; i < into.length - 1; i++) {
-        his[i]['esearch'] = into[i]['esearch'];
-        his[i]['tentry'] = into[i]['tentry'];
-        his.add({});
-      }
-    });
+
+    if (history.getString('his') != null) {
+      var info = history.getString('his');
+      var into = jsonDecode(info);
+      setState(() {
+        for (int i = 0; i < into.length - 1; i++) {
+          his[i]['esearch'] = into[i]['esearch'];
+          his[i]['tentry'] = into[i]['tentry'];
+          his.add({});
+        }
+      });
+    }
   }
 
   _clearhis() async {
     SharedPreferences history = await SharedPreferences.getInstance();
     history.remove('his');
     setState(() {
-       his = [
-      {"esearch": '', "tentry": ''}
-    ];
+      his = [
+        {"esearch": '', "tentry": ''}
+      ];
     });
-   
   }
 
   @override

@@ -59,15 +59,18 @@ class _HomepageState extends State<Homepage> {
 
   gethis() async {
     SharedPreferences history = await SharedPreferences.getInstance();
-    var info = history.getString('his');
-    var into = jsonDecode(info);
-    setState(() {
-      for (int i = 0; i < into.length - 1; i++) {
-        his[i]['esearch'] = into[i]['esearch'];
-        his[i]['tentry'] = into[i]['tentry'];
-        his.add({});
-      }
-    });
+    if (history.getString('his') != null &&
+        history.getString('his').length > 0) {
+      var info = history.getString('his');
+      var into = jsonDecode(info);
+      setState(() {
+        for (int i = 0; i < into.length - 1; i++) {
+          his[i]['esearch'] = into[i]['esearch'];
+          his[i]['tentry'] = into[i]['tentry'];
+          his.add({});
+        }
+      });
+    }
   }
 
   Future _speakeng() async {
@@ -195,6 +198,20 @@ class _HomepageState extends State<Homepage> {
     for (int i = 0; i < dataA.length; i++) {
       suggestions.add(dataA[i]['esearch']);
     }
+  }
+
+  removefav() {
+    setState(() {
+      for (int i = 0; i < fav.length; i++) {
+        if (eng == fav[i]['esearch']) {
+          fav.removeAt(i);
+          checkdup = true;
+          break;
+        } else {
+          checkdup = false;
+        }
+      }
+    });
   }
 
   @override
@@ -442,7 +459,9 @@ class _HomepageState extends State<Homepage> {
                                                       size: 25,
                                                       color: Colors.white,
                                                     )),
-                                                onTap: null
+                                                onTap: () {
+                                                  removefav();
+                                                }
                                                 // _savefav();
 
                                                 ),
