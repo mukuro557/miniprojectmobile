@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -106,7 +107,8 @@ class _SettingdictionaryState extends State<Settingdictionary> {
                 Text("6131302005@lamduan.mfu.ac.th"),
                 Text("6131302010@lamduan.mfu.ac.th"),
                 Text("6131301016@lamduan.mfu.ac.th"),
-                Text("5931301063@lamduan.mfu.ac.th")
+                Text("5931301063@lamduan.mfu.ac.th"),
+                Text('6131301020@lamduan.mfu.ac.th')
               ],
             ),
           ),
